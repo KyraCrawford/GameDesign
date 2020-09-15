@@ -16,7 +16,7 @@ elif b%2 == 0:
 else:
     print(d*c/a)
 
-    
+
 #else:
     #print('a is odd')
 
