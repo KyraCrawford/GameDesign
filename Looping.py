@@ -23,5 +23,4 @@ for i in numbers:
     print(i)
 
 for i in numbers:
-    pyramid = int(i)
-    print((str(i)+' ') * pyramid)
+    print((str(i)+' ') * i)
