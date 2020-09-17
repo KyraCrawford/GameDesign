@@ -32,9 +32,7 @@ right()
 def left():
     for i in numbers:
         print(((str(i) + ' ') * i).rjust(50))
-
 left()
 
 for i in numbers:
-    print(((str(i)+' ')* i).rjust(20))
-    print(((str(i)+' ')* i).ljust(50))
+    print((((((str(i)+' ')* i).rjust(25)+ (' ') + (str(i)+' ')* i))))
