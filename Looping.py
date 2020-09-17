@@ -24,15 +24,11 @@ for i in numbers:
 for i in numbers:
     print(i)
 
-def right():
-    for i in numbers:
-        print((str(i)+' ')* i)
-right()
-
-def left():
-    for i in numbers:
-        print(((str(i) + ' ') * i).rjust(50))
-left()
+for i in numbers:
+        print((str(i)+' ')* i) #right side
 
 for i in numbers:
-    print((((((str(i)+' ')* i).rjust(25)+ (' ') + (str(i)+' ')* i))))
+        print(((str(i) + ' ') * i).rjust(50)) #left side
+
+for i in numbers:
+    print((((((str(i)+' ')* i).rjust(25)+ (' ') + (str(i)+' ')* i)))) #full pyramid with middle space
