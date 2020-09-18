@@ -33,6 +33,8 @@ for i in range(0, top + 1):
     for x in range(top - i, 0, -1):
         print(x, end=' ')
     print()
+
+    
 numterms = 9
 a = 0
 b = 1
