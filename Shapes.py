@@ -1,6 +1,6 @@
 #KYRA CRAWFORD
 
-rows = int(input('Please type a number: \n'))
+rows = 9
 
 
 for line in range (rows):
