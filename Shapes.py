@@ -1,7 +1,6 @@
 #KYRA CRAWFORD
 
-rows = 9
-
+rows = 7
 
 for line in range (rows):
     print()
