@@ -4,7 +4,7 @@ strVar = "Here are the instructions to install Drivers:\n1. After the download i
 print(len(strVar))
 
 WordDriverCount = strVar.count('Drivers')
-print(WordDriverCount)
+print('The word "Drivers" comes up: ',WordDriverCount, ' times')
 
 strVar= strVar.replace('Extract','EXTRACT')
 strVar= strVar.replace('setup','SETUP')
