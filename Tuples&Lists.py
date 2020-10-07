@@ -47,3 +47,26 @@ for x in morenumbers:
 
 #check if element is in a tuple (10)
 print(3 in mixed_tuple)
+
+#convert list to tuple (11)
+List = ['red','green','blue','orange']
+print(List)
+List = tuple(List)
+print(List)
+
+#remove item from tuple (convert to list, remove,convert back)(12)
+random_tuple = list(random_tuple)
+random_tuple.remove('b')
+random_tuple = tuple(random_tuple)
+print(random_tuple)
+
+#slice a tuple (13)
+slice = morenumbers[6:] #from 6 index to end of tuple
+print(slice)
+
+#find index of an item in tuple (14)
+index = List.index('red')
+print('The word "red" is located at:',index)
+
+#find size or length of a tuple (15)
+print(len(mixed_tuple))
