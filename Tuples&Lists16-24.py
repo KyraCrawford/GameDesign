@@ -32,12 +32,14 @@ listofTups3.pop(0)
 print(listofTups3)
 
 #sort tuple with by its float(23)
-#???? idk what to do here
+#skip
 
-#count items in list until the next item is a tuple
-LIST = ['no', 'ok', 'cool', 'quick', (0,3), 'dog', 'house']
-count = LIST.count(str)
-print(count)
-if str == tuple:
-    print('This is a tuple')
-#this is not working, idk why it is giving me an error
+#count items in list until the next item is a tuple(24)
+LIST = ['no', 82, 'cool', 2.5, (0,3), 'dog', 'house']
+counter = 0
+for x in LIST:
+    counter += 1
+    if isinstance(x, (tuple)):
+        counter -= 1
+        break
+print(counter)
