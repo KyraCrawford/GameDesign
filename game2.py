@@ -7,7 +7,7 @@ name=input("What is your name? ")
 
 adj = {'tall':'gāo', 'small':'xiǎo', 'big':'dà', 'good':'hǎo', 'fast':'kuài', 'old':'lǎo', 'long':'chǎng', 'fat':'pàng', 'slow':'màn', 'short':'duǎn'}
 verb = {'throw':'diū', 'stand up':'qǐ lái', 'sit down':'zuò', 'run':'pǎo bù', 'walk':'bù xíng', 'sleep':'shuì jiào', 'eat':'chī', 'write':'xiě', 'drink':'hē', 'go to':'qù'}
-hobby = {'swimming':'yóuyǒng','play basketball':'dǎ lán qiú','play soccer':'tī zú qiú','play video games':'wán diàn wán','watch TV':'kàn diàn shì','play outside':'chū qù wán','drawing':'huà huà','go online':'shàng wǎng','play ping pong':'dǎ pīng pāng qiú','watch a movie(@ theater)':'kàn diàn yǐng'}
+hobby = {'swimming':'yóuyǒng','play basketball':'dǎ lán qiú','play soccer':'tī zú qiú','play video games':'wán diàn wán','watch TV':'kàn diàn shì','play outside':'chū qù wán','drawing':'huà huà','go online':'shàng wǎng','play ping pong':'dǎ pīng pāng qiú','watch movies':'kàn diàn yǐng'
 
 def GAME():
     score = 0
@@ -26,11 +26,11 @@ def GAME():
         print('What do you think the Mandarin word,',word,end=', is in English?')
         answer=input('\nAnswer: ')
         if answer == correct:
-            print('Correct!\n')
+            print('\nCorrect!\n')
             score += 1
             rounds -= 1
         else:
-            print('Incorrect!\n')
+            print('\nIncorrect!\n')
             rounds -= 1
         if rounds == 0:
             print('Your score was',score,'out of 10!')
@@ -40,7 +40,7 @@ def GAME():
             else:
                 print("Unfortunately, you didn't guess enough words correctly to win. Good game, though!\n")
     time.sleep(5)
-    start=input('Do you want to play again? (yes/no) ')
+        start=input('Do you want to play again? (yes/no) ')
 
 def MENU():
     print("* * * * * * * * * * * * * * *")
@@ -57,6 +57,7 @@ def MENU():
     print('*        How to win:        *')
     print('*      Guess 5 or more      *')
     print('*  word meanings correctly  *')
+    print('*                           *')
     print('* * * * * * * * * * * * * * *')
 
 start=input('Would you like to play? (yes/no) ')
