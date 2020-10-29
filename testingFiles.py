@@ -44,8 +44,3 @@ myFile.close()
 myFile = open('lineFile.txt', 'r')
 print(myFile.read())
 myFile.close()
-
-# HOMEWORK ASSIGNMENT
-#ask user for file name, and info to go inside file
-#make a menu for creating file(filename), deleting file(filename), adding to file, write in file (give warning about override)
-#print what is in file
