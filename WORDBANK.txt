@@ -1,0 +1,10 @@
+apple 1
+strawberry 2
+blueberry 3
+grape 4
+pear 5
+peach 6
+pineapple 7
+melon 8
+blackberry 9
+orange 10
