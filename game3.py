@@ -121,7 +121,7 @@ if start == 'y':
                     SCORE()
 
 
-        start = input('Do you want to play again? (y/n) ')
+    start = input('Do you want to play again? (y/n) ')
 
 elif start == 'n':
     print('Had enough fun already?')
