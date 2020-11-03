@@ -57,7 +57,6 @@ if start == 'y':
     print("Good Luck,", name,end='!\n')
 
     word = random.choice(words)
-    print(word)
     numofwords = (len(dict))
     guesses = ''
 
@@ -89,7 +88,7 @@ if start == 'y':
                 print('WOW, you guessed all the words correctly!')
                 print('Congratulations,',name,end='!\n')
                 print('Your score was',score,'out of 10!\n')
-                SCORE()
+                SCORE(name,score)
         # if user has input the wrong alphabet then
         # it will ask user to enter another alphabet
         guess = input("\rGuess a letter:")
@@ -112,7 +111,7 @@ if start == 'y':
                     print('GAME OVER!')
                     print('Your score was:',score)
                     print('\n')
-                    SCORE()
+                    SCORE(name,score)
     start = input('Do you want to play again? (y/n) ')
 elif start == 'n':
     print('Had enough fun already?')
