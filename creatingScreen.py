@@ -30,3 +30,4 @@ while run:
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT:
             run = False
+pygame.quit()

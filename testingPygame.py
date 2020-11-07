@@ -16,3 +16,13 @@ pygame.display.set_caption('MY GAME')
 
 pygame.display.flip()
 pygame.time.delay(1000000)
+
+
+run = True
+
+while run:
+    pygame.time.delay(1000)
+    for ev in pygame.event.get():
+        if ev.type == pygame.QUIT:
+            run = False
+pygame.quit()
