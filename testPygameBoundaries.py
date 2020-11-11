@@ -7,7 +7,6 @@ def main():
     screen = pg.display.set_mode((width, height))
     clock = pg.time.Clock()
     rect = pg.Rect(300, 220, hbox, vbox)
-    velocity = (0, 0)
     done = False
 
     while not done:
