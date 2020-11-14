@@ -24,7 +24,8 @@ y = 20
 rad = 30
 hbox, wbox = 20, 20
 rect = pygame.Rect(x, y, hbox, wbox)
-
+jump = 10
+Jump = False
 while run:
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT:
