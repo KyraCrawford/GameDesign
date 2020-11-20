@@ -1,77 +1,99 @@
 # KYRA CRAWFORD
-
-import pygame, os, sys
-
+import pygame
 pygame.init()
-
-idle = ['fishingguy\idle1.png','fishingguy\idle2.png','fishingguy\idle3.png','fishingguy\idle4.png']
-WIDTH = 640
-HEIGHT = 480
+WIDTH = 1000
+HEIGHT = 500
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
-bg = pygame.image.load('fishingguy\swamp.jpg')
-counter = 0
-counter = (counter + 1) % len(idle)
-player = pygame.image.load(idle[counter])
-playerX = 20
-playerY = 20
-jump = 3
+pygame.display.set_caption("First Game")
+
+walkRight = [pygame.image.load('axeguy\walk1.png'), pygame.image.load('axeguy\walk2.png'), pygame.image.load('axeguy\walk3.png'), pygame.image.load('axeguy\walk4.png'), pygame.image.load('axeguy\walk5.png'), pygame.image.load('axeguy\walk6.png'), pygame.image.load('axeguy\walk5.png'), pygame.image.load('axeguy\walk4.png'), pygame.image.load('axeguy\walk3.png'), pygame.image.load('axeguy\walk2.png'), pygame.image.load('axeguy\walk1.png')]
+walkLeft = [pygame.image.load('axeguy\walkleft1.png'), pygame.image.load('axeguy\walkleft2.png'), pygame.image.load('axeguy\walkleft3.png'), pygame.image.load('axeguy\walkleft4.png'), pygame.image.load('axeguy\walkleft5.png'), pygame.image.load('axeguy\walkleft4.png'), pygame.image.load('axeguy\walkleft5.png'), pygame.image.load('axeguy\walkleft6.png'), pygame.image.load('axeguy\walkleft5.png'), pygame.image.load('axeguy\walkleft4.png'), pygame.image.load('axeguy\walkleft3.png'), pygame.image.load('axeguy\walkleft2.png'), pygame.image.load('axeguy\walkleft1.png')]
+bg1 = pygame.image.load('axeguy\wallbg.jpg')
+bg2 = pygame.image.load('axeguy\crystalsbg.jpg')
+bg3 = pygame.image.load('axeguy\cavebg.png')
+bg4 = pygame.image.load('axeguy\caveexit.png')
+character = pygame.image.load('axeguy\idle2.png')
+back = ()
+back = bg1
+x = 0
+y = 400
+width = 40
+height = 60
+speed = 5
+#to control the frames
+clock = pygame.time.Clock()
 Jump = False
-def redrawScreen():
-    screen.blit(bg,(0,0))
-    screen.blit(player, (playerX, playerY))
-    pygame.display.flip()
-    pygame.time.delay(30)
-def moveright():
-    counter = 0
-    speed = 1
-    walkright = ['fishingguy\walk1.png','fishingguy\walk2.png','fishingguy\walk3.png','fishingguy\walk4.png','fishingguy\walk5.png']
-    counter = (counter + 1) % len(walkright)
-    player = pygame.image.load(walkright[counter])
-    playerX = playerX + speed
-def moveleft():
-    counter = 0
-    speed = 1
-    walkleft = ['fishingguy\walkleft1.png','fishingguy\walkleft2.png','fishingguy\walkleft3.png','fishingguy\walkleft4.png','fishingguy\walkleft5.png']
-    counter = (counter + 1) % len(walkleft)
-    player = pygame.image.load(walkleft[counter])
-    playerX = playerX - speed
-def jumping():
-    counter = 0
-    speed = 1
-    walk = ['fishingguy\walk1.png','fishingguy\walk2.png','fishingguy\walk3.png','fishingguy\walk4.png','fishingguy\walk5.png']
-    jumppic = pygame.image.load('fishingguy\jump.png')
-    if keyBoardKey[pygame.K_UP]: # subtract from y
-        counter = (counter + 1) % len(walk)
-        player = pygame.image.load(walk[counter])
-        playerY -= speed
-    if keyBoardKey[pygame.K_DOWN]: # add to y
-        counter = (counter + 1) % len(walk)
-        player = pygame.image.load(walk[counter])
-        playerY += speed
-    if keyBoardKey[pygame.K_SPACE]: #jumping
-        Jump = True
-        player = jumppic
+high = 8
+#control left and right move
+left = False
+right = False
+#control my list
+walkCount = 0
+def changebg():
+    global back
+    global bg2, bg3, bg4
+    if back == bg1:
+        back = bg2
+        x = 0
+    elif back == bg2:
+        back = bg3
+        x = 0
+    elif back == bg3:
+        back = bg4
+        x=0
+    else:
+        pygame.quit()
+    screen.blit(back,(0,0))
+def redrawGameWindow():
+    global walkCount #it makes sure is using the global walkCount that created earlier
+    screen.blit(back, (0,0))
+    if walkCount + 1 >= 27:
+        walkCount = 0
+    if left:
+        screen.blit(walkLeft[walkCount//3], (x,y))
+        walkCount += 1
+    elif right:
+        screen.blit(walkRight[walkCount//3], (x,y))
+        walkCount += 1
+    elif x == 1000:
+        changebg()
+    else:
+        screen.blit(character, (x, y))
+        walkCount = 0
+    pygame.display.update()
 run = True
 while run:
-    speed = 1
-    counter = 0
-    keyBoardKey = pygame.key.get_pressed()
-    if keyBoardKey[pygame.K_RIGHT]:
-        moveright()
-    if keyBoardKey[pygame.K_LEFT]:
-        moveleft()
-    if not Jump: # this is for moving up and down without a jump
-        jumping()
-    else:
-        if jump >= -10:
-            playerY -= (jump*abs(jump))/2
-            jump -= 1
-        else:
-            jump = 3
-            Jump = False
-            player = pygame.image.load(idle[counter])
+    clock.tick(27)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-    redrawScreen()
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT] and x > speed:
+        x -= speed
+        left = True
+        right = False
+    elif keys[pygame.K_RIGHT] and x < WIDTH - speed - width:
+        x += speed
+        left = False
+        right = True
+    else:
+        left = False
+        right = False
+        walkCount = 0
+    if not Jump:
+        if keys[pygame.K_SPACE]:
+            Jump = True
+            left = False
+            right = False
+            walkCount = 0
+    else:
+        if high >= -8:
+            y -= (high * abs(high)) * 0.5
+            high -= 1
+        else:
+            high = 8
+            Jump = False
+
+    redrawGameWindow()
 pygame.quit()
