@@ -8,10 +8,10 @@ pygame.display.set_caption("First Game")
 
 walkRight = [pygame.image.load('axeguy\walk1.png'), pygame.image.load('axeguy\walk2.png'), pygame.image.load('axeguy\walk3.png'), pygame.image.load('axeguy\walk4.png'), pygame.image.load('axeguy\walk5.png'), pygame.image.load('axeguy\walk6.png'), pygame.image.load('axeguy\walk5.png'), pygame.image.load('axeguy\walk4.png'), pygame.image.load('axeguy\walk3.png'), pygame.image.load('axeguy\walk2.png'), pygame.image.load('axeguy\walk1.png')]
 walkLeft = [pygame.image.load('axeguy\walkleft1.png'), pygame.image.load('axeguy\walkleft2.png'), pygame.image.load('axeguy\walkleft3.png'), pygame.image.load('axeguy\walkleft4.png'), pygame.image.load('axeguy\walkleft5.png'), pygame.image.load('axeguy\walkleft4.png'), pygame.image.load('axeguy\walkleft5.png'), pygame.image.load('axeguy\walkleft6.png'), pygame.image.load('axeguy\walkleft5.png'), pygame.image.load('axeguy\walkleft4.png'), pygame.image.load('axeguy\walkleft3.png'), pygame.image.load('axeguy\walkleft2.png'), pygame.image.load('axeguy\walkleft1.png')]
-bg1 = pygame.image.load('axeguy\wallbg.jpg')
+bg1 = pygame.image.load('axeguy\cavebg1.jpg')
 bg2 = pygame.image.load('axeguy\crystalsbg.jpg')
-bg3 = pygame.image.load('axeguy\cavebg.png')
-bg4 = pygame.image.load('axeguy\caveexit.png')
+bg3 = pygame.image.load('axeguy\cavebg2.png')
+bg4 = pygame.image.load('axeguy\caveexit.jpg')
 character = pygame.image.load('axeguy\idle2.png')
 back = ()
 back = bg1
@@ -29,23 +29,34 @@ left = False
 right = False
 #control my list
 walkCount = 0
+def GAMEOVER():
+    global back
+    endbg = pygame.image.load('axeguy\gameover.jpg')
+    character = ()
+    back = endbg
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
 def changebg():
+    global x
     global back
     global bg2, bg3, bg4
-    if back == bg1:
+    if back == bg1 and x >= WIDTH - speed - width:
         back = bg2
         x = 0
-    elif back == bg2:
+    elif back == bg2 and x >= WIDTH - speed - width:
         back = bg3
         x = 0
-    elif back == bg3:
+    elif back == bg3 and x >= WIDTH - speed - width:
         back = bg4
-        x=0
-    else:
-        pygame.quit()
+        x = 0
+    elif back == bg4 and x >= WIDTH - speed - width:
+        GAMEOVER()
     screen.blit(back,(0,0))
+    screen.blit(character, (x, y))
 def redrawGameWindow():
     global walkCount #it makes sure is using the global walkCount that created earlier
+    global x
     screen.blit(back, (0,0))
     if walkCount + 1 >= 27:
         walkCount = 0
@@ -55,11 +66,10 @@ def redrawGameWindow():
     elif right:
         screen.blit(walkRight[walkCount//3], (x,y))
         walkCount += 1
-    elif x == 1000:
-        changebg()
     else:
         screen.blit(character, (x, y))
         walkCount = 0
+        changebg()
     pygame.display.update()
 run = True
 while run:
@@ -67,7 +77,6 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and x > speed:
         x -= speed
