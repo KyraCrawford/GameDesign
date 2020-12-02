@@ -1,3 +1,4 @@
 Hangman SCORE RECORDS:
 2 wrong letters 2020/12/02 11:07
 2 wrong letters 2020/12/02 11:07
+2 wrong letters 2020/12/02 11:19

@@ -65,11 +65,11 @@ def MENU():
     text = TITLE_FONT.render("HANGMAN", 1, BLACK)
     instruction = TITLE_FONT.render('HOW TO PLAY\nSELECT A WORD LIST FROM BELOW\nTRY TO GUESS THE LETTERS IN EACH WORD\nSCORES ARE RECORDED IN SCORE_RECORDS_HM.txt\n**THE LOWER THE SCORE THE BETTER**',1, BLACK)
     button1 = WORD_FONT.render("FRUITS",1, PURP)
-    button2 = WORD_FONT.render('GADGETS',1, PURP)
+    button2 = WORD_FONT.render('GADGETS',1, PURP) # CREATING BUTTONS
     button3 = WORD_FONT.render('CLOTHING',1, PURP)
     win.blit(instruction,(40,50))
     win.blit(button1, (30,200))
-    win.blit(button2, (30,300))
+    win.blit(button2, (30,300))# PUTTING THE BUTTONS AND INFO ON THE SCREEN
     win.blit(button3, (30,400))
     win.blit(text, (WIDTH/2 - text.get_width()/2, 20))
     for event in pygame.event.get():

@@ -9,9 +9,7 @@ WIDTH, HEIGHT = 800, 800
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 #COLORS
 purp = [114, 40, 189]
-screen.fill(purp)
 pygame.display.flip()
-pygame.time.delay(1000)
 class Game:
     coins = []
     def __init__(self, width, height):
@@ -32,3 +30,6 @@ class Generator:
         for x in range(margin, screen.width - margin, width):
             for y in range(margin, int(screen.height / 2), width):
                 screen.coins.append(Coin(screen, x, y))
+run = True
+while run:
+    screen.fill(purp)
