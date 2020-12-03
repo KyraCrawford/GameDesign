@@ -26,6 +26,7 @@ for i in range(26):
 LETTER_FONT = pygame.font.SysFont('comicsans', 40)
 WORD_FONT = pygame.font.SysFont('comicsans', 60)
 TITLE_FONT = pygame.font.SysFont('comicsans', 70)
+INS_FONT = pygame.font.SysFont('comicsans', 25)
 
 # load images.
 images = []
@@ -39,16 +40,32 @@ score = 0
 FRUITS = ['STRAWBERRY','BLUEBERRY','APPLE','ORANGE','PEAR','PEACH','GRAPE'] #LEVEL OF WORDS
 GADGETS = ['COMPUTER','MOUSE','KEYBOARD','HEADPHONES','MONITOR','LAPTOP','PHONE'] #LEVEL OF WORDS
 CLOTHING = ['SHOES','SHIRT','SOCKS','PANTS','JACKET','BELT','SHORTS','HAT']
-# words = levelpick
-words = CLOTHING
-word = random.choice(words)
 guessed = []
+levelpick = []
 
 # colors
 WHITE = (255,255,255)
 BLACK = (0,0,0)
 PURP = (114, 40, 189)
 
+def INS():
+    win.fill(WHITE)
+    pygame.display.update()
+    in1 = INS_FONT.render('HOW TO PLAY:',1, BLACK)
+    in2 = INS_FONT.render('Guess the letters in the word',1, BLACK)
+    in3 = INS_FONT.render('Once the man is completed, the game is over',1, BLACK)
+    in4 = INS_FONT.render("Score will be kept in the document named,'SCORE_RECORDS_HM'" ,1, BLACK)
+    in5 = INS_FONT.render('***THE LOWER THE SCORE, THE BETTER***',1, BLACK)
+    next = INS_FONT.render('- PRESS SPACE TO CONTINUE -',1,BLACK)
+    win.blit(in1,(WIDTH/2 - in1.get_width()/2,200))
+    win.blit(in2,(WIDTH/2 - in2.get_width()/2,230))
+    win.blit(in3,(WIDTH/2 - in3.get_width()/2,260))
+    win.blit(in4,(WIDTH/2 - in4.get_width()/2,290))
+    win.blit(in5,(WIDTH/2 - in5.get_width()/2,320))
+    # win.blit(next,(WIDTH/2 - next.get_width()/2,550))
+    pygame.display.update()
+    pygame.time.delay(3000)
+    MENU()
 def SCORE(score):
     date = datetime.datetime.now()
     with open('SCORE_RECORDS_HM.txt') as s:
@@ -59,31 +76,31 @@ def SCORE(score):
         records.write('\n')
         records.close()
 def MENU():
+    keyBoardKey = pygame.key.get_pressed()
     global words
     global FRUITS, GADGETS, CLOTHING
+    global levelpick
     win.fill(WHITE)
+    pygame.display.update()
     text = TITLE_FONT.render("HANGMAN", 1, BLACK)
-    instruction = TITLE_FONT.render('HOW TO PLAY\nSELECT A WORD LIST FROM BELOW\nTRY TO GUESS THE LETTERS IN EACH WORD\nSCORES ARE RECORDED IN SCORE_RECORDS_HM.txt\n**THE LOWER THE SCORE THE BETTER**',1, BLACK)
-    button1 = WORD_FONT.render("FRUITS",1, PURP)
-    button2 = WORD_FONT.render('GADGETS',1, PURP) # CREATING BUTTONS
-    button3 = WORD_FONT.render('CLOTHING',1, PURP)
-    win.blit(instruction,(40,50))
+    button1 = WORD_FONT.render("[1] FRUITS",1, PURP)
+    button2 = WORD_FONT.render('[2] GADGETS',1, PURP) # CREATING BUTTONS
+    button3 = WORD_FONT.render('[3] CLOTHING',1, PURP)
+    buttons = [button1,button2,button3]
     win.blit(button1, (30,200))
-    win.blit(button2, (30,300))# PUTTING THE BUTTONS AND INFO ON THE SCREEN
+    win.blit(button2, (30,300)) # PUTTING THE BUTTONS AND INFO ON THE SCREEN
     win.blit(button3, (30,400))
     win.blit(text, (WIDTH/2 - text.get_width()/2, 20))
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            m_x, m_y = pygame.mouse.get_pos()
-            dis = math.sqrt((x - m_x)**2 + (y - m_y)**2)
-            if dis < RADIUS:
-                words = FRUITS
+    if keyBoardKey[pygame.K_1] and keyBoardKey[pygame.K_KP1]:
+        levelpick = FRUITS
+    pygame.display.update()
+    words = list(levelpick)
+    word = random.choice(words)
 def draw():
     win.fill(WHITE)
     # draw title
     text = TITLE_FONT.render("HANGMAN", 1, BLACK)
     win.blit(text, (WIDTH/2 - text.get_width()/2, 20)) # Notice centering
-
     # draw word
     display_word = ""
     for letter in word:
@@ -120,7 +137,7 @@ def main():
     FPS = 60
     clock = pygame.time.Clock()
     run = True
-    MENU()
+    INS()
     pygame.time.delay(3000)
     while run:
         clock.tick(FPS)
