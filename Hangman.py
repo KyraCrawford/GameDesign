@@ -41,7 +41,8 @@ FRUITS = ['STRAWBERRY','BLUEBERRY','APPLE','ORANGE','PEAR','PEACH','GRAPE'] #LEV
 GADGETS = ['COMPUTER','MOUSE','KEYBOARD','HEADPHONES','MONITOR','LAPTOP','PHONE'] #LEVEL OF WORDS
 CLOTHING = ['SHOES','SHIRT','SOCKS','PANTS','JACKET','BELT','SHORTS','HAT']
 guessed = []
-levelpick = []
+words = GADGETS
+word = random.choice(words)
 
 # colors
 WHITE = (255,255,255)
@@ -76,10 +77,8 @@ def SCORE(score):
         records.write('\n')
         records.close()
 def MENU():
-    keyBoardKey = pygame.key.get_pressed()
     global words
     global FRUITS, GADGETS, CLOTHING
-    global levelpick
     win.fill(WHITE)
     pygame.display.update()
     text = TITLE_FONT.render("HANGMAN", 1, BLACK)
@@ -91,11 +90,7 @@ def MENU():
     win.blit(button2, (30,300)) # PUTTING THE BUTTONS AND INFO ON THE SCREEN
     win.blit(button3, (30,400))
     win.blit(text, (WIDTH/2 - text.get_width()/2, 20))
-    if keyBoardKey[pygame.K_1] and keyBoardKey[pygame.K_KP1]:
-        levelpick = FRUITS
     pygame.display.update()
-    words = list(levelpick)
-    word = random.choice(words)
 def draw():
     win.fill(WHITE)
     # draw title
