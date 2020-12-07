@@ -7,8 +7,10 @@ import random
 import os
 import datetime
 level = ''
+run = False
 black = (0,0,0)
 white = (255,255,255)
+purp = (114, 40, 189)
 result = 0
 timeleft = 0
 pygame.init()
@@ -56,21 +58,23 @@ def set_background(bg):
     pygame.display.flip()
 menu = True
 def mainEasy():
+    global timeleft
     timeleft = 60
     level = 'EASY'
     run = True
 def mainMedium():
+    global timeleft
     timeleft = 45
     level = 'MEDIUM'
     run = True
 def mainHard():
+    global timeleft
     timeleft = 30
     level = 'HARD'
     run = True
 def leaderboard():
     os.system('SCORE_RECORDS_CLICK.txt')
 
-run = False
 while run:
     font = pygame.font.Font(None, 30)
     text = font.render('Click to start! SEIZURE WARNING! FLASHING LIGHTS!', True, (0, 0, 0), (255, 255, 255))
@@ -85,11 +89,12 @@ while run:
     pygame.display.flip()
     show_time(timeleft)
     if result>0 and timeleft>0:
-        timeleft = 60-(int(time.time())-timestart)
+        timeleft = timeleft-(int(time.time())-timestart)
         show_time(timeleft)
     elif result>0 and timeleft<=0:
         show_result('Your result is: '+str(result)+'. You\'re great!')
         SCORE(result)
+        break
     event = pygame.event.poll()
     if event.type == pygame.QUIT:
         sys.exit()
@@ -104,28 +109,28 @@ while menu:
     button_1 = pygame.Rect(100,600,200,50)
     button_2 = pygame.Rect(400,600,200,50)
     button_3 = pygame.Rect(700,600,200,50)
-    button_4 = pygame.Rect(300,700,200,50)
-    button_5 = pygame.Rect(600,700,200,50)
+    button_4 = pygame.Rect(150,695,365,50)
+    button_5 = pygame.Rect(570,695,170,50)
     mx, my = pygame.mouse.get_pos()
     screen.fill(white)
     # rectangles for buttons
-    pygame.draw.rect(screen, (255,0,0), button_1)
-    pygame.draw.rect(screen, (255,0,0), button_2)
-    pygame.draw.rect(screen, (255,0,0), button_3)
-    pygame.draw.rect(screen, (255,0,0), button_4)
-    pygame.draw.rect(screen, (255,0,0), button_5)
+    pygame.draw.rect(screen, (purp), button_1)
+    pygame.draw.rect(screen, (purp), button_2)
+    pygame.draw.rect(screen, (purp), button_3)
+    pygame.draw.rect(screen, (purp), button_4)
+    pygame.draw.rect(screen, (purp), button_5)
     text1 = TITLE_FONT.render("CLICKITY CLICK CLICK", 1, black)
-    screen.blit(text1, (int(width/2 - (text1.get_width()/2)), 20))
+    screen.blit(text1, (int(width/2 - (text1.get_width()/2)), 100))
     text2 = INS_FONT.render("HOW TO PLAY:", 1, black)
-    screen.blit(text2, (int(width/2 - text2.get_width()/2), 90))
+    screen.blit(text2, (int(width/2 - text2.get_width()/2), 190))
     text2_0 = INS_FONT.render("Click the screen as many times as possible!", 1, black)
-    screen.blit(text2_0, (int(width/2 - text2_0.get_width()/2), 140))
+    screen.blit(text2_0, (int(width/2 - text2_0.get_width()/2), 240))
     text2_1 = INS_FONT.render("The amount of time you have to click", 1, black)
-    screen.blit(text2_1, (int(width/2 - text2_1.get_width()/2), 190))
+    screen.blit(text2_1, (int(width/2 - text2_1.get_width()/2), 290))
     text2_2 = INS_FONT.render("is determined by the level you pick.", 1, black)
-    screen.blit(text2_2, (int(width/2 - text2_2.get_width()/2), 240))
+    screen.blit(text2_2, (int(width/2 - text2_2.get_width()/2), 340))
     text2_3 = INS_FONT.render("The higher the difficulty, the less time you have.", 1, black)
-    screen.blit(text2_3, (int(width/2 - text2_3.get_width()/2), 290))
+    screen.blit(text2_3, (int(width/2 - text2_3.get_width()/2), 390))
     text3 = WORD_FONT.render("EASY", 1, black)
     screen.blit (text3, (int(width/5 - text3.get_width()/2), 605))
     text4 = WORD_FONT.render("MEDIUM", 1, black)
@@ -146,18 +151,21 @@ while menu:
         if click:
             screen.fill(black)
             pygame.display.update()
+            run = True
             mainEasy()
             pass
     if button_2.collidepoint((mx,my)):
         if click:
             screen.fill(black)
             pygame.display.update()
+            run = True
             mainMedium()
             pass
     if button_3.collidepoint((mx,my)):
         if click:
             screen.fill(black)
             pygame.display.update()
+            run = True
             mainHard()
             pass
     if button_4.collidepoint((mx,my)):
