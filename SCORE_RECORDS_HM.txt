@@ -1,8 +1,2 @@
 Hangman SCORE RECORDS:
-2 wrong letters 2020/12/02 11:07
-2 wrong letters 2020/12/02 11:07
-2 wrong letters 2020/12/02 11:19
-3 wrong letters 2020/12/02 21:25
-6 wrong letters 2020/12/02 21:27
-2 wrong letters 2020/12/02 21:52
-6 wrong letters 2020/12/02 22:39
+Kyra - 6 wrong letters 2020/12/03 10:52

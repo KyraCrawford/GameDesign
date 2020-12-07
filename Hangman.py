@@ -9,7 +9,7 @@ pygame.init()
 WIDTH, HEIGHT = 800, 800
 win = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Hangman Game!")
-
+# name= input('What is your name: ')
 # setup  button variables
 RADIUS = 20
 GAP = 15
@@ -43,13 +43,14 @@ CLOTHING = ['SHOES','SHIRT','SOCKS','PANTS','JACKET','BELT','SHORTS','HAT']
 guessed = []
 words = GADGETS
 word = random.choice(words)
-
+keyBoardKey = pygame.key.get_pressed()
 # colors
 WHITE = (255,255,255)
 BLACK = (0,0,0)
 PURP = (114, 40, 189)
 
 def INS():
+    global keyBoardKey
     win.fill(WHITE)
     pygame.display.update()
     in1 = INS_FONT.render('HOW TO PLAY:',1, BLACK)
@@ -65,12 +66,17 @@ def INS():
     win.blit(in5,(WIDTH/2 - in5.get_width()/2,320))
     # win.blit(next,(WIDTH/2 - next.get_width()/2,550))
     pygame.display.update()
-    pygame.time.delay(3000)
+    pygame.time.delay(300)
     MENU()
+    if keyBoardKey[pygame.K_SPACE]:
+        print('SPACE PRESSED')
+    pygame.display.update()
 def SCORE(score):
     date = datetime.datetime.now()
     with open('SCORE_RECORDS_HM.txt') as s:
         records = open('SCORE_RECORDS_HM.txt','a')
+        # records.write(str(name))
+        # records.write(' - ')
         records.write(str(score))
         records.write(' wrong letters ')
         records.write(date.strftime('%Y/%m/%d %H:%M'))
@@ -85,10 +91,10 @@ def MENU():
     button1 = WORD_FONT.render("[1] FRUITS",1, PURP)
     button2 = WORD_FONT.render('[2] GADGETS',1, PURP) # CREATING BUTTONS
     button3 = WORD_FONT.render('[3] CLOTHING',1, PURP)
-    buttons = [button1,button2,button3]
     win.blit(button1, (30,200))
     win.blit(button2, (30,300)) # PUTTING THE BUTTONS AND INFO ON THE SCREEN
     win.blit(button3, (30,400))
+    button1Rect = button1.get_rect()
     win.blit(text, (WIDTH/2 - text.get_width()/2, 20))
     pygame.display.update()
 def draw():
@@ -152,7 +158,6 @@ def main():
                             if ltr not in word:
                                 hangman_status += 1
                                 score += 1
-
         draw()
 
         won = True
