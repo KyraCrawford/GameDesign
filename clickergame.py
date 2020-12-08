@@ -97,7 +97,7 @@ def MENU(menu):
         button_2 = pygame.Rect(400,600,200,50)
         button_3 = pygame.Rect(700,600,200,50)
         button_4 = pygame.Rect(150,695,365,50)
-        button_5 = pygame.Rect(570,695,170,50)
+        button_5 = pygame.Rect(540,695,250,50)
         mx, my = pygame.mouse.get_pos()
         screen.fill(white)
         # rectangles for buttons
@@ -120,6 +120,8 @@ def MENU(menu):
         screen.blit(text2_3, (int(width/2 - text2_3.get_width()/2), 390))
         text2_4 = INS_FONT.render('The score records are kept on the file, "SCORE_RECORDS_CLICK".',1,black)
         screen.blit(text2_4, (int(width/2 - text2_4.get_width()/2),440))
+        textWarn = WORD_FONT.render('**SEIZURE WARNING - FLASHING COLORS**',1,(255,0,0))
+        screen.blit(textWarn,(int(width/2 - textWarn.get_width()/2),500))
         text3 = WORD_FONT.render("EASY", 1, black)
         screen.blit (text3, (int(width/5 - text3.get_width()/2), 605))
         text4 = WORD_FONT.render("MEDIUM", 1, black)
@@ -128,8 +130,8 @@ def MENU(menu):
         screen.blit(text5, (int(width/1.25 - text5.get_width()/2), 605))
         text6 = WORD_FONT.render("LEADERBOARD", 1, black)
         screen.blit(text6, (int(width/3 - text6.get_width()/2), 700))
-        text7 = WORD_FONT.render("EXIT", 1, black)
-        screen.blit(text7, (int(width/1.53 - text7.get_width()/2), 700))
+        text7 = WORD_FONT.render("[ESC] EXIT", 1, black)
+        screen.blit(text7, (int(width/1.5 - text7.get_width()/2), 700))
         pygame.display.update()
         event = pygame.event.poll()
             # code behind clicking the buttons
@@ -165,18 +167,16 @@ def MENU(menu):
         if button_5.collidepoint((mx,my)):
             if click:
                 pygame.quit()
-                pass
+        keyBoardKey = pygame.key.get_pressed()
+        if keyBoardKey[pygame.K_ESCAPE]:
+            pygame.quit()
+        if event.type == pygame.QUIT:
+            run=False
+            sys.exit()
         click = False
 MENU(True)
 while run:
     MENU(False)
-    font = pygame.font.Font(None, 30)
-    text = font.render('Click to start! SEIZURE WARNING - FLASHING LIGHTS!', True, (0, 0, 0), (255, 255, 255))
-    textRect = text.get_rect()
-    textRect.centerx = screen.get_rect().centerx
-    textRect.centery = screen.get_rect().centery
-    screen.blit(text, textRect)
-    pygame.display.update()
     background = (255,255,255)
     set_background(background)
     screen.fill(background)
@@ -192,6 +192,7 @@ while run:
             show_time(timeleft)
         elif result>=0 and timeleft<=0:
             show_result('You got this many clicks: '+str(result)+'. GOOD JOB!')
+            time.sleep(3)
             SCORE(result)
             run = False
             MENU(True)
