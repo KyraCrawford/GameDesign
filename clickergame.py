@@ -18,13 +18,14 @@ timeleft = 0
 leveltime = 0
 pygame.init()
 width = 1000
-height = 800
+height = 800 # setting screen parameters
 screen = pygame.display.set_mode((width,height))
 pygame.display.set_caption('CLICKITY CLICK CLICK')
 LETTER_FONT = pygame.font.SysFont('comicsans', 40)
-WORD_FONT = pygame.font.SysFont('comicsans', 60)
+WORD_FONT = pygame.font.SysFont('comicsans', 60) #setting fonts
 TITLE_FONT = pygame.font.SysFont('comicsans', 70)
 INS_FONT = pygame.font.SysFont('comicsans', 25)
+# function for score keeping and leaderboard
 def SCORE(result):
     global level
     date = datetime.datetime.now()
@@ -56,10 +57,11 @@ def show_time(time):
     textRect.y = screen.get_rect().y+5
     screen.blit(text, textRect)
     pygame.display.update()
+#background changing function
 def set_background(bg):
     screen.fill(bg)
     pygame.display.flip()
-
+# creating the easy gamemode
 def mainEasy():
     global timeleft
     global run
@@ -69,6 +71,7 @@ def mainEasy():
     leveltime = 60
     level = 'EASY'
     run = True
+# creating the medium gamemode
 def mainMedium():
     global timeleft
     global run
@@ -78,6 +81,7 @@ def mainMedium():
     leveltime = 45
     level = 'MEDIUM'
     run = True
+# creating the hard gamemode
 def mainHard():
     global timeleft
     global run
@@ -87,6 +91,7 @@ def mainHard():
     leveltime = 30
     level = 'HARD'
     run = True
+# open the leaderboard for the LEADERBOARD button
 def leaderboard():
     os.system('SCORE_RECORDS_CLICK.txt')
 
