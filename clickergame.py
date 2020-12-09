@@ -147,7 +147,7 @@ def MENU(menu):
         top = pygame.image.load('clicker\shrek.png')
         screen.blit(top,(int(width/2 - top.get_width()/2),25))
         by = INS_FONT.render('A GAME BY KYRA CRAWFORD',1,black)
-        screen.blit(by,(60,780))
+        screen.blit(by,(65,780))
         bottom = pygame.image.load('clicker\dog2.png')
         screen.blit(bottom,(0,750))
         pygame.display.update()
@@ -212,6 +212,9 @@ while run:
             show_time(timeleft)
         elif result>=0 and timeleft<=0:
             show_result('You got this many clicks: '+str(result)+'. GOOD JOB!')
+            nice = pygame.image.load('clicker/nicework.png')
+            screen.blit(nice,(int(width/2 - nice.get_width()/2),270))
+            pygame.display.update()
             time.sleep(3)
             SCORE(result)
             run = False
