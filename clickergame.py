@@ -6,7 +6,6 @@ import math
 import random
 import os
 import datetime
-leaderboardfile = open('SCORE_RECORDS_CLICK.txt')
 level = ''
 run = False
 menu = True
@@ -125,8 +124,10 @@ def MENU(menu):
         screen.blit(text2_3, (int(width/2 - text2_3.get_width()/2), 390))
         text2_4 = INS_FONT.render('The score records are kept on the file, "SCORE_RECORDS_CLICK".',1,black)
         screen.blit(text2_4, (int(width/2 - text2_4.get_width()/2),440))
-        textWarn = WORD_FONT.render('**SEIZURE WARNING - FLASHING COLORS**',1,(255,0,0))
-        screen.blit(textWarn,(int(width/2 - textWarn.get_width()/2),500))
+        text2_5 = INS_FONT.render('[Auto-Clickers are NOT permitted]',1,black)
+        screen.blit(text2_5,(int(width/2 - text2_5.get_width()/2),490))
+        textWarn = LETTER_FONT.render('**SEIZURE WARNING - FLASHING COLORS**',1,(255,0,0))
+        screen.blit(textWarn,(int(width/2 - textWarn.get_width()/2),550))
         text3 = WORD_FONT.render("EASY", 1, black)
         screen.blit (text3, (int(width/5 - text3.get_width()/2), 605))
         text4 = WORD_FONT.render("MEDIUM", 1, black)
@@ -137,6 +138,18 @@ def MENU(menu):
         screen.blit(text6, (int(width/3 - text6.get_width()/2), 700))
         text7 = WORD_FONT.render("[ESC] EXIT", 1, black)
         screen.blit(text7, (int(width/1.5 - text7.get_width()/2), 700))
+        cursorpic = pygame.image.load('clicker\cursor.png')
+        screen.blit(cursorpic,(725,120))
+        leftlook = pygame.image.load('clicker\ok.png')
+        screen.blit(leftlook,(100,280))
+        rightlook = pygame.image.load('clicker\chad.png')
+        screen.blit(rightlook,(730,280))
+        top = pygame.image.load('clicker\shrek.png')
+        screen.blit(top,(int(width/2 - top.get_width()/2),25))
+        by = INS_FONT.render('A GAME BY KYRA CRAWFORD',1,black)
+        screen.blit(by,(60,780))
+        bottom = pygame.image.load('clicker\dog2.png')
+        screen.blit(bottom,(0,750))
         pygame.display.update()
         event = pygame.event.poll()
             # code behind clicking the buttons
@@ -188,6 +201,8 @@ while run:
     pygame.display.flip()
     level = level
     leveltime = leveltime
+    timeleft = timeleft
+    result = 0
     while True:
         if result == 0:
             timestart = int(time.time())
