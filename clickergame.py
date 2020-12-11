@@ -1,20 +1,21 @@
 import pygame
 import sys
 import time
-import random
+import random #importing modules that will be used
 import math
 import random
 import os
 import datetime
 from pygame import mouse
+
 level = ''
 run = False
-menu = True
+menu = True #opens menu first
 black = (0,0,0)
-white = (255,255,255)
+white = (255,255,255) #creating some colors for the game
 purp = (114, 40, 189)
 result = 0
-timeleft = 0
+timeleft = 0 #setting game variables
 leveltime = 0
 pygame.init()
 width = 1000
@@ -22,7 +23,7 @@ height = 800 # setting screen parameters
 screen = pygame.display.set_mode((width,height))
 pygame.display.set_caption('CLICKITY CLICK CLICK')
 LETTER_FONT = pygame.font.SysFont('comicsans', 40)
-WORD_FONT = pygame.font.SysFont('comicsans', 60) #setting fonts
+WORD_FONT = pygame.font.SysFont('comicsans', 60) #setting fonts for different text types
 TITLE_FONT = pygame.font.SysFont('comicsans', 70)
 INS_FONT = pygame.font.SysFont('comicsans', 25)
 # function for score keeping and leaderboard
@@ -31,19 +32,19 @@ def SCORE(result):
     date = datetime.datetime.now()
     with open('SCORE_RECORDS_CLICK.txt') as s:
         records = open('SCORE_RECORDS_CLICK.txt','a')
-        records.write(str(result))
+        records.write(str(result)) #score
         records.write(' clicks on ')
-        records.write(str(level))
+        records.write(str(level)) # creating the score records line-by-line, level mode
         records.write(' difficulty ')
-        records.write(date.strftime('%Y/%m/%d %H:%M'))
+        records.write(date.strftime('%Y/%m/%d %H:%M')) #time records was made
         records.write('\n')
         records.close()
 def show_result(text):
     global background
-    background = (random.randint(50,255), random.randint(50,255), random.randint(50,255))
+    background = (random.randint(50,255), random.randint(50,255), random.randint(50,255)) #creates random color from rgb scale
     set_background(background)
     font = pygame.font.Font(None, 50)
-    text = font.render(' '*100+str(text)+' '*100, True, (0, 0, 0), background)
+    text = font.render(' '*100+str(text)+' '*100, True, (0, 0, 0), background) #printing the number of clicks on the screen
     textRect = text.get_rect()
     textRect.centerx = screen.get_rect().centerx #centering
     textRect.centery = screen.get_rect().centery #centering
@@ -53,7 +54,7 @@ def show_time(time):
     font = pygame.font.Font(None, 25)
     text = font.render('Time left(seconds): '+str(time)+' '*100, True, black, background)
     textRect = text.get_rect()
-    textRect.x = screen.get_rect().x+5
+    textRect.x = screen.get_rect().x+5 #in-game timer
     textRect.y = screen.get_rect().y+5
     screen.blit(text, textRect)
     pygame.display.update()
@@ -68,7 +69,7 @@ def mainEasy():
     global level
     global leveltime
     timeleft = 60
-    leveltime = 60
+    leveltime = 60 #level presets, resets game variables
     level = 'EASY'
     run = True
 # creating the medium gamemode
@@ -78,7 +79,7 @@ def mainMedium():
     global level
     global leveltime
     timeleft = 45
-    leveltime = 45
+    leveltime = 45 #level presets, resets game variables
     level = 'MEDIUM'
     run = True
 # creating the hard gamemode
@@ -88,7 +89,7 @@ def mainHard():
     global level
     global leveltime
     timeleft = 30
-    leveltime = 30
+    leveltime = 30 #level presets, resets game variables
     level = 'HARD'
     run = True
 # open the leaderboard for the LEADERBOARD button
@@ -101,7 +102,7 @@ def MENU(menu):
         #creating the buttons
         button_1 = pygame.Rect(100,600,200,50)
         button_2 = pygame.Rect(400,600,200,50)
-        button_3 = pygame.Rect(700,600,200,50)
+        button_3 = pygame.Rect(700,600,200,50) #setting parameters for buttons
         button_4 = pygame.Rect(150,695,365,50)
         button_5 = pygame.Rect(540,695,250,50)
         mx, my = pygame.mouse.get_pos()
@@ -109,7 +110,7 @@ def MENU(menu):
         # rectangles for buttons
         pygame.draw.rect(screen, (purp), button_1)
         pygame.draw.rect(screen, (purp), button_2)
-        pygame.draw.rect(screen, (purp), button_3)
+        pygame.draw.rect(screen, (purp), button_3) # putting the buttons on screen
         pygame.draw.rect(screen, (purp), button_4)
         pygame.draw.rect(screen, (purp), button_5)
         text1 = TITLE_FONT.render("CLICKITY CLICK CLICK", 1, black)
@@ -122,7 +123,7 @@ def MENU(menu):
         screen.blit(text2_1, (int(width/2 - text2_1.get_width()/2), 290))
         text2_2 = INS_FONT.render("is determined by the level you pick.", 1, black)
         screen.blit(text2_2, (int(width/2 - text2_2.get_width()/2), 340))
-        text2_3 = INS_FONT.render("The higher the difficulty, the less time you have.", 1, black)
+        text2_3 = INS_FONT.render("The higher the difficulty, the less time you have.", 1, black) # CREATING THE MENU AND INSTRUCTIONS
         screen.blit(text2_3, (int(width/2 - text2_3.get_width()/2), 390))
         text2_4 = INS_FONT.render('The score records are kept on the file, "SCORE_RECORDS_CLICK".',1,black)
         screen.blit(text2_4, (int(width/2 - text2_4.get_width()/2),440))
@@ -133,7 +134,7 @@ def MENU(menu):
         text3 = WORD_FONT.render("EASY", 1, black)
         screen.blit (text3, (int(width/5 - text3.get_width()/2), 605))
         text4 = WORD_FONT.render("MEDIUM", 1, black)
-        screen.blit(text4, (int(width/2 - text4.get_width()/2), 605))
+        screen.blit(text4, (int(width/2 - text4.get_width()/2), 605)) # button text
         text5 = WORD_FONT.render("HARD", 1, black)
         screen.blit(text5, (int(width/1.25 - text5.get_width()/2), 605))
         text6 = WORD_FONT.render("LEADERBOARD", 1, black)
@@ -142,19 +143,20 @@ def MENU(menu):
         screen.blit(text7, (int(width/1.5 - text7.get_width()/2), 700))
         cursorpic = pygame.image.load('clicker\cursor.png')
         screen.blit(cursorpic,(725,120))
-        leftlook = pygame.image.load('clicker\ok.png')
+        leftlook = pygame.image.load('clicker\ok.png') #adding pics to menu
         screen.blit(leftlook,(100,280))
         rightlook = pygame.image.load('clicker\chad.png')
         screen.blit(rightlook,(730,280))
         top = pygame.image.load('clicker\shrek.png')
         screen.blit(top,(int(width/2 - top.get_width()/2),25))
-        by = INS_FONT.render('A GAME BY KYRA CRAWFORD',1,black)
+        by = INS_FONT.render('A GAME BY KYRA CRAWFORD',1,black) #name and logo image on bottom left corner
         screen.blit(by,(65,780))
         bottom = pygame.image.load('clicker\dog2.png')
         screen.blit(bottom,(0,750))
         pygame.display.update()
         event = pygame.event.poll()
             # code behind clicking the buttons
+        #checking if the left mouse is clicked
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 click = True
@@ -163,25 +165,25 @@ def MENU(menu):
                 screen.fill(black)
                 pygame.display.update()
                 menu= False
-                mainEasy()
+                mainEasy()#starts the game with the presets of easy mode
                 pass
         if button_2.collidepoint((mx,my)):
             if click:
                 screen.fill(black)
                 pygame.display.update()
                 menu =False
-                mainMedium()
+                mainMedium()#starts the game with the presets of med mode
                 pass
         if button_3.collidepoint((mx,my)):
             if click:
                 screen.fill(black)
                 pygame.display.update()
                 menu =False
-                mainHard()
+                mainHard() #starts the game with the presets of hard mode
                 pass
         if button_4.collidepoint((mx,my)):
             if click:
-                pygame.quit()
+                pygame.quit() #exit the program
                 leaderboard()
                 pass
         if button_5.collidepoint((mx,my)):
@@ -189,20 +191,20 @@ def MENU(menu):
                 pygame.quit()
         keyBoardKey = pygame.key.get_pressed()
         if keyBoardKey[pygame.K_ESCAPE]:
-            pygame.quit()
+            pygame.quit() #key event for exiting the game
         if event.type == pygame.QUIT:
             run=False
             sys.exit()
-        click = False
+        click = False #closing clikc loop
 MENU(True)
 while run:
     MENU(False)
     background = (255,255,255)
     set_background(background)
-    screen.fill(background)
+    screen.fill(background) #changes the background to random colors with each click
     pygame.display.flip()
     level = level
-    leveltime = leveltime
+    leveltime = leveltime #insuring the level presets are what the game recognizes
     timeleft = timeleft
     result = 0
     while True:
@@ -219,7 +221,7 @@ while run:
             pygame.display.update()
             time.sleep(3)
             SCORE(result)
-            mouse.set_pos(100,100)
+            mouse.set_pos(100,100) #set mouse position to avoid click error
             run = False
             MENU(True)
             break
