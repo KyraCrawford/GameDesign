@@ -6,6 +6,7 @@ import math
 import random
 import os
 import datetime
+from pygame import mouse
 level = ''
 run = False
 menu = True
@@ -95,6 +96,7 @@ def leaderboard():
     os.system('SCORE_RECORDS_CLICK.txt')
 
 def MENU(menu):
+    mouse.set_pos(100,100)
     while menu:
         #creating the buttons
         button_1 = pygame.Rect(100,600,200,50)
@@ -217,6 +219,7 @@ while run:
             pygame.display.update()
             time.sleep(3)
             SCORE(result)
+            mouse.set_pos(100,100)
             run = False
             MENU(True)
             break
