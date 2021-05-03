@@ -1,7 +1,7 @@
 #KYRA CRAWFORD
 #PSUEDOCODE:
 #Add event getting to exit
-#Add three different levels 
+#Add three different levels
 #Each level you have less time
 #Clicking screen gives you a point
 #Leaderboard has gamemode, points, time
