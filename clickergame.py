@@ -1,3 +1,14 @@
+#KYRA CRAWFORD
+#PSUEDOCODE:
+#Add event getting to exit
+#Add three different levels 
+#Each level you have less time
+#Clicking screen gives you a point
+#Leaderboard has gamemode, points, time
+#The background changes to random color
+#Menu has different images on it
+#Use collidepoint() for mouse clicking
+
 import pygame
 import sys
 import time
